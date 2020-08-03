@@ -13,5 +13,5 @@ Instruções:
 - Baixe a ultima versão do publicare3 em outra pasta
 - Aponte o Apache para a pasta source/public_html/
 - Ajuste as configurações do Portal em source/cfg/global.php
--- Path do PBL3 deve ser configurado
--- Conexao com banco
+  - Path do PBL3 deve ser configurado
+  - Conexao com banco
