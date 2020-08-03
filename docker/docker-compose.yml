@@ -1,0 +1,54 @@
+version: '3.4'
+services:
+            
+    comtur:
+        container_name: comtur
+        build:
+            context: .
+            dockerfile: Dockerfile
+        ports:
+            - "8080:80"
+        volumes:
+            - "../source/:/var/www/html/"
+            - "../../cache-composer/:/root/.composer/"
+            - ./upload.ini:/usr/local/etc/php/conf.d/upload.ini
+        networks:
+            - comtur
+    comtur-mysql:
+        image: mysql
+        command: --default-authentication-plugin=mysql_native_password
+        container_name: comtur-mysql
+        ports:
+            - "3306:3306"
+            - "33060:33060"
+        volumes:
+            - "mysqlconfig:/etc/mysql/conf.d"
+            - "mysqldados:/var/lib/mysql"
+            - "./bancos_iniciar:/docker-entrypoint-initdb.d"
+        networks:
+            - comtur
+        environment:
+            MYSQL_ROOT_PASSWORD: 123456
+            
+    comtur-phpmyadmin:
+        image: phpmyadmin/phpmyadmin
+        container_name: comtur-phpmyadmin
+        ports:
+            - "8086:80"
+        networks:
+            - comtur
+        environment:
+            MYSQL_ROOT_PASSWORD: 123456
+            PMA_ARBITRARY: 1
+
+volumes:
+    mysqlconfig:
+        driver: local
+        name: mysqlconfig
+    mysqldados:
+        driver: local
+        name: mysqldados
+        
+networks:
+    comtur:
+        driver: bridge

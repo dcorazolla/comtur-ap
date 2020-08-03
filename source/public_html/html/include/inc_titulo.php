@@ -1,0 +1,1 @@
+<p class="h2"><@= #titulo @> <@incluir arquivo=['/html/include/inc_logado.php']@></p>

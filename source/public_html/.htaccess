@@ -1,0 +1,9 @@
+RewriteEngine on
+RewriteBase /
+
+#RewriteRule ^(.*) participa/$1 
+#RewriteRule (.*) /participa/$1^subdirectory/(.*)$ /$1 [R=301,NC,L]
+RewriteCond %{REQUEST_FILENAME} !-f
+#RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule !\.(js|ico|txt|gif|jpg|png|css|swf|flv|pdf|cur|woff|woff2|eot|svg|otf|ttf|mp4|json|map)$ index.php
+
